@@ -1,4 +1,5 @@
 import logging
+from src.scraper.qafqazinfo import QafqazinfoScraper
 from src.scraper.sonxeber import SonxeberScraper
 from src.scraper.report import ReportAzScraper
 
@@ -9,7 +10,8 @@ logging.basicConfig(
 
 def main():
     scrapers = [
-        SonxeberScraper(delay=1.5),
+        QafqazinfoScraper(delay=0.7)
+        #SonxeberScraper(delay=1.5),
         #ReportAzScraper(delay=1.5)
     ]
     
@@ -33,11 +35,18 @@ def main():
                 "medeniyyet-xeberleri",
                 "dunya-xeberleri"
             ]
+            
+        elif scraper.source_name == "qafqazinfo_az":
+            target_categories = [
+                "idman-9",
+                "dunya-6",
+                "siyaset-2"
+            ]
     
     
         scraper.scrape_all(
             categories=target_categories,
-            max_pages=100
+            max_pages=70
         )
 
 if __name__ == "__main__":
