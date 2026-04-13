@@ -14,7 +14,6 @@ sample = dupes[dupes['title_lower'] == sample_title][['title', 'source', 'catego
 print("=== Sample duplicate ===")
 print(sample.to_string())
 
-# Idman breakdown
 idman_raw = df[df['category'].isin(['idman-xeberleri', 'idman-9'])]
 print(f"\n=== Idman breakdown ===")
 print(f"Idman raw: {len(idman_raw)}")
