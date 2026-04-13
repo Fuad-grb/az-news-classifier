@@ -23,7 +23,6 @@ def main():
                 "siyaset-xeberleri",
                 "sosial-xeberler",
                 "idman-xeberleri",
-                "medeniyyet-xeberleri",
                 "dunya-xeberleri"
             ]
         elif scraper.source_name == "report_az":
@@ -32,7 +31,6 @@ def main():
                 "iqtisadiyyat-xeberleri",
                 "cemiyyet",
                 "idman-xeberleri",
-                "medeniyyet-xeberleri",
                 "dunya-xeberleri"
             ]
             

@@ -47,10 +47,9 @@ class QafqazinfoScraper(BaseScraper):
             response.raise_for_status()
             soup = BeautifulSoup(response.text, "lxml")
             
-            # Title is in h4 with class "hemcinin" or just the main header for different categories
-            title_tag = soup.find("h1") or soup.find("h2")
+
+            title_tag = soup.find("title")
             title = title_tag.get_text(strip=True) if title_tag else "No Title"
-            
 
             content_div = soup.find("div", class_="news_text")
             
