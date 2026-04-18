@@ -3,3 +3,8 @@ beautifulsoup4
 lxml
 pyyaml
 pandas
+scikit-learn
+matplotlib
+seaborn
+torch
+transformers
