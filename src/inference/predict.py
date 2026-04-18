@@ -40,6 +40,8 @@ class NewsPredictor:
 
 if __name__ == "__main__":
     
+    # this checkpoint shows better performance on inference tests than the final model,
+    # so I decided to use it for the predict.py instead of the final model
     MODEL_PATH = "models/checkpoints/checkpoint-1332" 
     
     if not os.path.exists(MODEL_PATH):

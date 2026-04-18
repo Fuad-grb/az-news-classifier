@@ -213,9 +213,11 @@ models/
 *.safetensors
 *.bin
 *.pth
-*.onnx
+
 
 checkpoints/
+*.onnx
+
 logs/
 
 mlruns/
