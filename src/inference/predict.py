@@ -1,3 +1,4 @@
+import json
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch.nn.functional as F
@@ -12,8 +13,11 @@ class NewsPredictor:
         self.model.to("cuda" if torch.cuda.is_available() else "cpu")
         self.model.eval()
         
-        # Mapping from label indices to category names, should match the order used during training
-        self.labels = {0: 'dunya', 1: 'idman', 2: 'iqtisadiyyat', 3: 'siyaset', 4: 'sosial'}
+        # Load label mapping to convert predicted class index back to category name
+        with open(f"{model_path}/label_mapping.json") as f:
+            self.labels = json.load(f)
+        self.labels = {int(k): v for k, v in self.labels.items()}
+        
 
     def predict(self, text):
         inputs = self.tokenizer(
