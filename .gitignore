@@ -210,6 +210,13 @@ data/raw/
 data/
 
 models/
-.safetensors
-.bin
-.pth
+*.safetensors
+*.bin
+*.pth
+*.onnx
+
+checkpoints/
+logs/
+
+mlruns/
+results/
