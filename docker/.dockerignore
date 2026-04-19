@@ -1,0 +1,8 @@
+data/
+notebooks/
+venv/
+.git/
+models/checkpoints/
+__pycache__/
+*.pyc
+.env
