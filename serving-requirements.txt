@@ -5,3 +5,4 @@ transformers
 numpy
 sentencepiece
 protobuf
+prometheus-client

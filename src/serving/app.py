@@ -5,6 +5,8 @@ import numpy as np
 from transformers import AutoTokenizer
 import json
 import time
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from fastapi.responses import Response
 
 app = FastAPI(title="Azerbaijan News Classifier")
 
@@ -28,7 +30,30 @@ class PredictionResponse(BaseModel):
     
 @app.get("/health")
 def health_check():
-    return {"status": "healthy"}
+    if session is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+    return {"status": "healthy", "model": "loaded"}
+
+# Prometheus metrics
+PREDICTIONS_TOTAL = Counter(
+    'predictions_total', 
+    'Total predictions by category', 
+    ['category']
+)
+PREDICTION_LATENCY = Histogram(
+    'prediction_latency_seconds', 
+    'Prediction latency in seconds',
+    buckets=[0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5] 
+)
+PREDICTION_CONFIDENCE = Histogram(
+    'prediction_confidence', 
+    'Prediction confidence scores',
+    buckets=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
+)
+
+@app.get("/metrics")
+def metrics():
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 # Endpoint for making predictions
 @app.post("/predict", response_model=PredictionResponse)
@@ -58,9 +83,15 @@ def predict(request: PredictionRequest):
     
     latency_ms = (time.time() - start_time) * 1000  # Convert to milliseconds
     
+    PREDICTIONS_TOTAL.labels(category=label_mapping[str(pred_class)]).inc() # Increment the counter for the predicted category
+    PREDICTION_LATENCY.observe(latency_ms / 1000)  # convert ms to seconds
+    PREDICTION_CONFIDENCE.observe(float(probabilities[pred_class])) # Observe the confidence score for the predicted class
+    
     return PredictionResponse(
         category=label_mapping[str(pred_class)],
         confidence=float(confidence),
         probabilities={label_mapping[str(i)]: float(j) for i, j in enumerate(probabilities)},
         latency_ms=round(latency_ms, 2)
     )
+    
+    
