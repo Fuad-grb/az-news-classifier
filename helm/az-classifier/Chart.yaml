@@ -1,0 +1,5 @@
+apiVersion: v2 
+name: az-classifier 
+description: Azerbaijani news classification ML service 
+version: 0.1.0 
+appVersion: "1.0.0" 
