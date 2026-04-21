@@ -51,7 +51,7 @@ Scraping: abstract base scraper class with site-specific implementations for rep
 Cleaning: category name normalization across sites (siyasi-xeberler = siyaset-xeberleri = siyaset-2 → siyaset), remove articles under 50 words, title-based deduplication for cross-site duplicates.
 Split: temporal for articles with dates, stratified random for undated articles. Not random — news data has leakage through recurring stories and same-day paraphrases.
 
-Raw: 11,589 articles → Cleaned: 10,148 → Train: 7,102 / Val: 1,522 / Test: 1,524
+Raw: 11,589 articles; Cleaned: 10,148; Train: 7,102 / Val: 1,522 / Test: 1,524
 
 Running locally
 
