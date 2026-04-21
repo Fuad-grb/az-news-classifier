@@ -7,8 +7,18 @@ import json
 import time
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 from fastapi.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Azerbaijan News Classifier")
+
+# CORS middleware to allow frontend applications to access the API without issues,
+# especially during development when frontend and backend might be served from different origins.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # loading the ONNX model and tokenizer at startup for efficient inference
 
@@ -93,5 +103,31 @@ def predict(request: PredictionRequest):
         probabilities={label_mapping[str(i)]: float(j) for i, j in enumerate(probabilities)},
         latency_ms=round(latency_ms, 2)
     )
+    
+    
+# Additional endpoints for stats and model info for frontend display and monitoring
+@app.get("/api/stats")
+def stats():
+    return {
+        "total_predictions": sum(
+            PREDICTIONS_TOTAL.labels(category=cat)._value.get() 
+            for cat in ["dunya", "idman", "iqtisadiyyat", "siyaset", "sosial"]
+        ),
+        "categories": {
+            cat: PREDICTIONS_TOTAL.labels(category=cat)._value.get()
+            for cat in ["dunya", "idman", "iqtisadiyyat", "siyaset", "sosial"]
+        }
+    }
+
+@app.get("/api/model-info")
+def model_info():
+    return {
+        "model_name": "XLM-RoBERTa-base",
+        "format": "ONNX",
+        "categories": list(label_mapping.values()),
+        "max_length": 256,
+        "test_f1": 0.93,
+        "test_accuracy": 0.93
+    }
     
     

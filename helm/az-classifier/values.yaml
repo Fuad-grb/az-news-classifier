@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: fuad152022658/az-classifier
-  tag: v2
+  tag: v3
   pullPolicy: IfNotPresent
 
 service:

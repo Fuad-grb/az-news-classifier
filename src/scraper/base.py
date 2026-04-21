@@ -25,7 +25,7 @@ class BaseScraper(ABC):
         self.max_retries = max_retries
         
     @property
-    @abstractmethod
+    @abstractmethod # abstract method means that any subclass must implement this method
     def source_name(self) -> str:
         pass
 
