@@ -139,7 +139,7 @@ function App() {
             value={text}
             onChange={e => setText(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Xəbər mətnini daxil edin..."
+            placeholder="Enter the news text..."
             style={{
               width: '100%',
               height: 140,
