@@ -6,7 +6,7 @@ Live demo: [news.fuadgurbanov.com](https://news.fuadgurbanov.com)
 
 ## Overview
 
-Azerbaijani is a low-resource language with no publicly available labeled datasets for news classification. The project covers the full pipeline: scraping ~11.5K articles from three news sites, cleaning down to ~10K, fine-tuning XLM-RoBERTa-base, ONNX export for CPU inference, and deployment on k3s with Helm and monitoring.
+Azerbaijani is a low-resource language with no publicly available labeled datasets for news classification. The project covers the full pipeline: scraping about 12K articles from three news sites, cleaning down to ~10K, fine-tuning XLM-RoBERTa-base, ONNX export for CPU inference, and deployment on k3s with Helm and monitoring.
 
 Categories:
 
