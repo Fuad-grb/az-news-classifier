@@ -25,16 +25,16 @@ Categories:
 Per-class observations: idman has the most distinctive vocabulary and is classified most reliably. siyaset and sosial overlap the most — political and social news share a lot of language. dunya and iqtisadiyyat get confused on articles where world news is primarily about economic events.
 
 ## Architecture
-Scraping (3 sites) → Cleaning + Dedup → Train/Val/Test Split
-↓
-XLM-RoBERTa Fine-tuning → ONNX Export
-↓
-FastAPI + ONNX Runtime → Docker
-↓
-k3s + Helm → Traefik Ingress → HPA
-↓
-Prometheus + Grafana (custom ML metrics)
-↓
+Scraping (3 sites) → Cleaning + Dedup → Train/Val/Test Split;
+
+XLM-RoBERTa Fine-tuning → ONNX Export;
+
+FastAPI + ONNX Runtime → Docker;
+
+k3s + Helm → Traefik Ingress → HPA;
+
+Prometheus + Grafana (custom ML metrics);
+
 React Frontend
 
 ## Stack
