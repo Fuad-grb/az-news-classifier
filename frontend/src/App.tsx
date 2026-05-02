@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = 'http://az-classifier.local';
+const API_URL = 'https://classifier.fuadgurbanov.com';
 
 interface PredictionResult {
   category: string;
